@@ -1,0 +1,117 @@
+body{
+
+}
+
+.header{
+    width: 70%;
+    height: 150px;
+    margin-bottom: 100px;
+}
+
+.body{
+
+}
+
+.body_text{
+    text-align: center;
+}
+
+.body_login{
+    width: 600px;
+    height: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    border: black solid 1px;
+    border-radius: 20px;
+    
+}
+
+.body_login_form{
+    
+    
+}
+.body_login_form_input{
+    margin-left: 175px;
+    margin-top: 60px;
+    width: 250px;
+    height: 30px;
+    border: solid 1px gray;
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.body_login_form_input:focus{
+    margin-left: 175px;
+    margin-top: 60px;
+    width: 250px;
+    height: 30px;
+    border: solid 1px gray;
+    border-radius: 10px;
+    background-color: lightgray;
+    font-size: 15px;
+    text-align: center;
+}
+
+.body_login_form_input:hover{
+    margin-left: 175px;
+    margin-top: 60px;
+    width: 250px;
+    height: 30px;
+    border: solid 1px gray;
+    border-radius: 10px;
+    background-color: lightgray;
+    font-size: 15px;
+    text-align: center;
+}
+
+.body_login_form_input_submit{
+    margin-left: 175px;
+    margin-top: 60px;
+    width: 250px;
+    height: 30px;
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.body_login_form_input_submit:hover{
+    margin-left: 175px;
+    margin-top: 60px;
+    width: 250px;
+    height: 30px;
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 15px;
+    text-align: center;
+}
+
+.body_login_register{
+    margin-left: 175px;
+    margin-top: 60px;
+    width: 250px;
+    height: 30px;
+    border: solid 1px gray;
+    border-radius: 10px;
+    background-color: lightgray;
+    font-size: 15px;
+    text-align: center;
+}
+
+.backhome{
+    width: 100%;
+    height: auto;
+    color: black;
+    text-align: center;
+}
+.backhome:hover{
+    width: 100%;
+    height: auto;
+    font-weight: 600;
+    color: black;
+    text-align: center;
+    cursor: default;
+}
