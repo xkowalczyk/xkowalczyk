@@ -10,9 +10,9 @@
 
         <div class="body_login">
             <form action="auth/login" method="POST" class="body_login_form">
-                <input type="email" name="user_email" placeholder="Podaj adres e-mail" class="body_login_form_input" required><br>
-                <input type="password" name="user_password" placeholder="Podaj hasło" class="body_login_form_input" required><br><br>
-                <input type="hidden" name="login_token">
+                <input type="email" name="userEmail" placeholder="Podaj adres e-mail" class="body_login_form_input" required><br>
+                <input type="password" name="userPassword" placeholder="Podaj hasło" class="body_login_form_input" required><br><br>
+                <input type="hidden" name="loginToken" value="7x6gh">
                 <input type="submit" value="Zaloguj!" class="body_login_form_input_submit">
             </form>
 

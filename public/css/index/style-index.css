@@ -10,15 +10,15 @@ body{
 
 .body_hotprice{
     float: left;
-    width: 25%;
+    width: 23%;
     height: 100%;
     border-radius: 10px;
     border: solid 1px black;
 }
 
 .body_recommended{
-    float: right;
-    width: 75%;
+    float: left;
+    width: 73%;
     height: 100%;
     border: solid 1px black;
 }

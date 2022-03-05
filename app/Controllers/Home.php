@@ -2,25 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Models\CategoryModel;
+use App\Libraries\Services\ProductService;
 use CodeIgniter\Controller;
 
 class Home extends Controller
 {
-    private $dbConnect;
+
+    private $productService;
 
     public function __construct(){
-        $this->dbConnect = \Config\Database::connect();
+        $this->productService = new ProductService();
     }
 
     public function index()
     {
-        $productModel = model(ProductModel::class);
-        $hotProduct = $productModel->getHotProduct();
-        $featuredProduct = $productModel->getFeaturedProduct();
 
-        $SystemLang['hot_product'] = $hotProduct;
-        $SystemLang['featured_product'] = $featuredProduct;
+        $SystemLang['hot_product'] = $this->productService->getHotProduct();
+        $SystemLang['featured_product'] = $this->productService->getFeaturedProduct();
 
         echo view('templates/header.php');
         echo view('Home/index.php', $SystemLang);
