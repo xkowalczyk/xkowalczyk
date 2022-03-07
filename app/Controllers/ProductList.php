@@ -25,9 +25,16 @@ class ProductList extends Controller
         echo view('ProductList/productlist.php', $SystemLang);
     }
 
-    public function filter($filterParameters)
+    public function filter($filterParameters = null)
     {
-        $SystemLang['productList'] = $this->productService->getFilterProduct($filterParameters, $this->request->getGet());
+        if ($filterParameters == null && $this->request->getGet() == null) {
+            return redirect()->to(base_url('productlist'));
+        } else if (isset($this->request->getGet()['search'])) {
+            return redirect()->to(base_url('product'));
+        } else {
+            $SystemLang['productList'] = $this->productService->getFilterProduct($filterParameters, $this->request->getGet());
+        }
+
         echo view('templates/header.php');
         echo view('ProductList/categorylist.php');
         echo view('ProductList/productlist.php', $SystemLang);

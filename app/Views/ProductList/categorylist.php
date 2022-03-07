@@ -5,7 +5,7 @@ use App\Libraries\Services\CategoryService;
 $categoryService = new CategoryService();
 $category = $categoryService->getCategory();
 ?>
-<link rel="stylesheet" href="css/productlist/style-category-list.css">
+<link rel="stylesheet" href="<?php esc(base_url())?>css/productlist/style-category-list.css">
 
 <div class="categorylist">
     <?php foreach ($category as $categoryItem) : ?>

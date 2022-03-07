@@ -35,7 +35,7 @@ helper('html');
             </div>
 
             <div class="header_top_search">
-                <form class="header_top_search_searchform">
+                <form method="GET" action="productlist/filter" class="header_top_search_searchform">
                     <input type="text" name="search_item" class="header_top_search_searchform_searchinput">
                     <input type="checkbox" name="item_withdesc">
                     <input type="submit">
