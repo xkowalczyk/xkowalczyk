@@ -27,3 +27,11 @@ body{
     width: 100%;
     height: 30%;
 }
+
+.body_hotprice_checkbutton{
+    border: solid 1px lightgray;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 15px;
+    text-align: center;
+}

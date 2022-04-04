@@ -20,9 +20,9 @@ helper('html');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style-global.css" rel="stylesheet" type="text/css">
-    <link href="css/header/style-header.css" rel="stylesheet" type="text/css">
-    <link href="css/import.css" rel="stylesheet" type="text/css">
+    <link href="<?= esc(base_url()) ?>/css/style-global.css" rel="stylesheet" type="text/css">
+    <link href="<?= esc(base_url()) ?>/css/header/style-header.css" rel="stylesheet" type="text/css">
+    <link href="<?= esc(base_url()) ?>/css/import.css" rel="stylesheet" type="text/css">
     <title>XKOWALCZYK</title>
 </head>
 <header>
@@ -31,11 +31,11 @@ helper('html');
         <div class="header_top">
 
             <div class="header_top_logo" onclick='location.href="<?= esc(base_url()); ?>"'>
-                <img src="graph/ico.jpg" width="200px" height="40px">
+                <img src="<?= esc(base_url())?>/graph/ico.jpg" width="200px" height="40px">
             </div>
 
             <div class="header_top_search">
-                <form method="GET" action="productlist/filter" class="header_top_search_searchform">
+                <form method="GET" action="<?= esc(base_url()) ?>/productlist/filter" class="header_top_search_searchform">
                     <input type="text" name="search_item" class="header_top_search_searchform_searchinput">
                     <input type="checkbox" name="item_withdesc">
                     <input type="submit">
@@ -45,11 +45,11 @@ helper('html');
             <div class="header_top_menu">
                 <?php if ($isLogged == false) { ?>
                     <div class="header_top_menu_accountbutton">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAZRJREFUWEftl/ExBTEQh79XASqgE1RACVTAqwAVoAM6oAJ0QAd08FTA/EzOZDKX3OaymTkz9q8393LZ73Z/m92sWJitFsbDnwXaBq6BY0C/vewOWAObYUNrhB6AIy+KZJ974KQW6KsTjLZVdHZ6Ar0FJ/sVH/GbKWvKLBG6Am5iPQCXwIUBzB3oMQh+zLdFf+5Ap4AqZszOQ4WWAuUOdAg8ZzweAE8TaXMH6hahWLyx4KdEregoSu4amgskEFXUbVRlOtHPwvOpQsumrAVocPoaoKQdq3UFskLE67oAfYRKew+e9gBFaddA6Ar0EnRSKnvpq9RK3IA0OqhdWKx0QLoAqXfpy2ss19uagaQXaWSOSWOprpqBdN4oBXNMKdb55FplEnBOxFOQqrz0jGqO0JTT2v8XBfQZXxzSiTHXOixDVm1UhvXFIT8HpEapAUy535rreeQ9wag4stegHJAjQ3kra8r+gYYIKJeeGtG+1qvWD0O62HqPqklhE5AcCUp3bcscYwFrBrI46bamir4bRbTx4oC+AQPmWSWQyMshAAAAAElFTkSuQmCC" onclick="location.href='login'" />
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAZRJREFUWEftl/ExBTEQh79XASqgE1RACVTAqwAVoAM6oAJ0QAd08FTA/EzOZDKX3OaymTkz9q8393LZ73Z/m92sWJitFsbDnwXaBq6BY0C/vewOWAObYUNrhB6AIy+KZJ974KQW6KsTjLZVdHZ6Ar0FJ/sVH/GbKWvKLBG6Am5iPQCXwIUBzB3oMQh+zLdFf+5Ap4AqZszOQ4WWAuUOdAg8ZzweAE8TaXMH6hahWLyx4KdEregoSu4amgskEFXUbVRlOtHPwvOpQsumrAVocPoaoKQdq3UFskLE67oAfYRKew+e9gBFaddA6Ar0EnRSKnvpq9RK3IA0OqhdWKx0QLoAqXfpy2ss19uagaQXaWSOSWOprpqBdN4oBXNMKdb55FplEnBOxFOQqrz0jGqO0JTT2v8XBfQZXxzSiTHXOixDVm1UhvXFIT8HpEapAUy535rreeQ9wag4stegHJAjQ3kra8r+gYYIKJeeGtG+1qvWD0O62HqPqklhE5AcCUp3bcscYwFrBrI46bamir4bRbTx4oC+AQPmWSWQyMshAAAAAElFTkSuQmCC" onclick="location.href='<?= esc(base_url()) ?>/login'" />
                     </div>
                 <?php } else { ?>
                     <div class="header_top_menu_accountbutton">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEfVl9FVwkAQRd/LYfMrViCdCBVoCVoBUIFQAdABdqAViB1oB9gB/hJPnmcFYpCEbMhG434mk9mbN7MzO0TDFhvGg/8JJKAdBcGE0jWAti9VRc5NHA8JrHY+nRSKyAcAV75A0n5E3odxfFMWSHXAbH2ujHReJ9ArNiG4dP0JIyWRcg1ZsULSuAVM0/kQASOQd0VgdQA9mk3CHyyX/PMOJOk2BOZZQGtgQHJyTCXvQJB6BlhkKgR0QT79KlBtCkVkkrxpGdPPc/50YaSe9xyqAARIoxYw250yW90/gD7I0cmnrBLQ964v2zrULQLZvc9Nak9ArhyJXS1AAt5ALhjHS7uTgqADqUvgoojQN9CzzZ+CY2/zKLeVeAOSNAyBaZEC9v2xAukHSBob26tKrLzeVhnI5ksodUqwJKZrcvkzryoDgZyZOB6cAhQFwRRSP/1tdSDbt6TM3lUISdr6tFejfAAV7lvGoGlA70ZKBoe9G+ORSv03l/w8oK9GSdoLmI39WZlwHLO1E4c9HLljUB6QLwAXP04hc3Hky6bxQHae8pYjVrX0kXZRcV8hxznKxXHW5cvlu4NB0TZAkTcu9xiXDSop5LJB3TZOo3TdEGn/jQP6BF8PHDSPkS2HAAAAAElFTkSuQmCC" onclick="location.href='account'" />
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEfVl9FVwkAQRd/LYfMrViCdCBVoCVoBUIFQAdABdqAViB1oB9gB/hJPnmcFYpCEbMhG434mk9mbN7MzO0TDFhvGg/8JJKAdBcGE0jWAti9VRc5NHA8JrHY+nRSKyAcAV75A0n5E3odxfFMWSHXAbH2ujHReJ9ArNiG4dP0JIyWRcg1ZsULSuAVM0/kQASOQd0VgdQA9mk3CHyyX/PMOJOk2BOZZQGtgQHJyTCXvQJB6BlhkKgR0QT79KlBtCkVkkrxpGdPPc/50YaSe9xyqAARIoxYw250yW90/gD7I0cmnrBLQ964v2zrULQLZvc9Nak9ArhyJXS1AAt5ALhjHS7uTgqADqUvgoojQN9CzzZ+CY2/zKLeVeAOSNAyBaZEC9v2xAukHSBob26tKrLzeVhnI5ksodUqwJKZrcvkzryoDgZyZOB6cAhQFwRRSP/1tdSDbt6TM3lUISdr6tFejfAAV7lvGoGlA70ZKBoe9G+ORSv03l/w8oK9GSdoLmI39WZlwHLO1E4c9HLljUB6QLwAXP04hc3Hky6bxQHae8pYjVrX0kXZRcV8hxznKxXHW5cvlu4NB0TZAkTcu9xiXDSop5LJB3TZOo3TdEGn/jQP6BF8PHDSPkS2HAAAAAElFTkSuQmCC" onclick="location.href='<?= esc(base_url()) ?>/account'" />
                     </div>
                 <?php } ?>
 
@@ -65,7 +65,7 @@ helper('html');
             <div class="header_down_menu">
 
                 <?php if (isset($category)) foreach ($category as $categoryItem) : ?>
-                    <div class="header_down_menu_item" onclick='location.href="productlist/filter/c-<?= esc($categoryItem['category_id']) ?>"'>
+                    <div class="header_down_menu_item" onclick='location.href="<?= esc(base_url()) ?>/productlist/filter/c-<?= esc($categoryItem['category_id']) ?>"'>
                         <div class="header_down_menu_item_ico">
                             <?= img("graph/category/{$categoryItem['category_photo']}", false, ['width' => '50', 'height' => '50']); ?>
                         </div>

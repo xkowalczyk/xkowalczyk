@@ -20,23 +20,11 @@ class Classtest extends Controller
 
     public function index()
     {
-        $email = \Config\Services::email();
-        $email->setFrom('test@gmail.com' ,'Maciej Kowalczyk');
-        $email->setTo('ytmrhc@gmail.com');
-        $email->setSubject('test');
-        $email->setMessage('test');
-        if ($email->send()){
-            echo "true";
-        } else {
-            echo "false";
-        };
+        echo view('templates/header.php');
     }
 
     public function test()
     {
-        print_r($this->testSystem->registerCheck('ytmrhc@gmail.com'));
-        //print_r($this->testSystems->checkLoginUser('ytmrhc@gmail.com'));
-        //$this->testSystem->putAddress('testm', 'testmm', 'testh', 'tests', 'testp');
-        //return redirect()->to(base_url('login'));
+        echo view('templates/header.php');
     }
 }

@@ -32,6 +32,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->get('/s', 'Classtest::test');
+$routes->get('/product/(:num)', 'Product::index/$1');
 
 /*
  * --------------------------------------------------------------------

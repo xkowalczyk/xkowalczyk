@@ -1,0 +1,17 @@
+.body_product{
+    width: 100%;
+}
+
+.body_product_image{
+    border: 1px solid black;
+    width: 30%;
+    height: 300px;
+    float: left;
+}
+
+.body_product_information{
+    border: 1px solid black;
+    width: 60%;
+    height: 300px;
+    float: left;
+}
