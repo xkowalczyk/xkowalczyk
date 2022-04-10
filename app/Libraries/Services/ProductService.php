@@ -141,4 +141,22 @@ class ProductService
             }
         }
     }
+
+    public function getSearchProduct($searchString){
+        $checkProducts = $this->getAllProducts();
+        $returnProduct = array();
+
+        $arrayIndex = 0;
+        foreach($checkProducts as $item){
+           $productCheckName = explode(' ', $item->item_name);
+           foreach($productCheckName as $productFragment){
+                if($productFragment == $searchString){
+                    $returnProduct[$arrayIndex] = $item;
+                    $arrayIndex++;
+                }
+           }
+        }
+
+        return $returnProduct;
+    }
 }

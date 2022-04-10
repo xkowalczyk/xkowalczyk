@@ -21,16 +21,18 @@ class ProductList extends Controller
         $SystemLang['productList'] = $this->productService->getAllProducts();
 
         echo view('templates/header.php');
-        echo view('ProductList/categorylist.php');
+        echo view('ProductList/categorylist.php'); 
         echo view('ProductList/productlist.php', $SystemLang);
     }
 
     public function filter($filterParameters = null)
     {
+        $SystemLang['productList'] = null;
+
         if ($filterParameters == null && $this->request->getGet() == null) {
             return redirect()->to(base_url('productlist'));
-        } else if (isset($this->request->getGet()['search'])) {
-            return redirect()->to(base_url('product'));
+        } else if (isset($this->request->getGet()['search_item'])) {
+            $SystemLang['productList'] = $this->productService->getSearchProduct($this->request->getGet()['search_item']);
         } else {
             $SystemLang['productList'] = $this->productService->getFilterProduct($filterParameters, $this->request->getGet());
         }
@@ -39,4 +41,5 @@ class ProductList extends Controller
         echo view('ProductList/categorylist.php');
         echo view('ProductList/productlist.php', $SystemLang);
     }
+
 }

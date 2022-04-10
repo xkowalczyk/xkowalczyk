@@ -9,12 +9,12 @@ $category = $categoryService->getCategory();
 
 <div class="categorylist">
     <?php foreach ($category as $categoryItem) : ?>
-        <?php $hrefString = "productlist/filter/c-".$categoryItem['category_id'] ?>
+        <?php $hrefString = base_url()."/productlist/filter/c-".$categoryItem['category_id'] ?>
         <div class="categorylist_category">
             <a href="<?= esc($hrefString) ?>" class="categorylist_category_title"><?= esc($categoryItem['category_name']) ?></a>
             <?php $subCategory = $categoryService->getSubCategory($categoryItem['category_id']);
             foreach ($subCategory as $subCategoryItem) : ?>
-                <?php $hrefString = "productlist/filter/s-".$subCategoryItem['subcategory_id'] ?>
+                <?php $hrefString = base_url()."/productlist/filter/s-".$subCategoryItem['subcategory_id'] ?>
                 <br>&nbsp; &nbsp;<a href="<?= esc($hrefString) ?>"><?= esc($subCategoryItem['subcategory_name']) ?></a>
             <?php endforeach; ?>
         </div>

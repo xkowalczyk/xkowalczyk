@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\UserAddressModel;
 use App\Libraries\Services\UserService;
 use App\Libraries\Services\AuthService;
+use App\Libraries\Services\SessionService;
 use CodeIgniter\Controller;
 use CodeIgniter\Database\Config;
 
@@ -16,6 +17,7 @@ class Classtest extends Controller
     {
         $this->testSystem = new UserService();
         $this->testSystems = new AuthService();
+        $this->testSystemss = new SessionService();
     }
 
     public function index()
@@ -25,6 +27,6 @@ class Classtest extends Controller
 
     public function test()
     {
-        echo view('templates/header.php');
+        $this->testSystemss->setSession('adminLogged', 'ss');
     }
 }
