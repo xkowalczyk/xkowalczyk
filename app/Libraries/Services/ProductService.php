@@ -150,7 +150,7 @@ class ProductService
         foreach($checkProducts as $item){
            $productCheckName = explode(' ', $item->item_name);
            foreach($productCheckName as $productFragment){
-                if($productFragment == $searchString){
+                if(mb_strtolower($productFragment) == mb_strtolower($searchString)){
                     $returnProduct[$arrayIndex] = $item;
                     $arrayIndex++;
                 }

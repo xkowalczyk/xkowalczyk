@@ -1,0 +1,22 @@
+.body_productlist{
+    width: 100%;
+    height: 100%;
+    margin-top: 30px;
+}
+
+.body_productlist_item{
+    width: 100%;
+    height: 70px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+.body_productlist_item_photo{
+    height: 100%;
+    width: 10%;
+    float: left;
+}
+
+.body_productlist_item_dellItemButton{
+    float: right;
+}

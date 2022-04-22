@@ -27,8 +27,11 @@ class Auth extends Controller
 
     public function login()
     {
-        $data = $this->getLoginFormPool();
+        if ($this->sessionService->checkIssetSession('adminLogged') == true) {
+            return redirect()->to(base_url('admin'));
+        }
 
+        $data = $this->getLoginFormPool();
 
         if ($this->sessionService->checkIssetSession('userLogged') == true) {
             return redirect()->to(base_url('account'));
@@ -56,6 +59,10 @@ class Auth extends Controller
 
     public function register()
     {
+        if ($this->sessionService->checkIssetSession('adminLogged') == true) {
+            return redirect()->to(base_url('admin'));
+        }
+
         $data = $this->getRegisterFormPool();
 
         if ($this->sessionService->checkIssetSession('userLogged') == true) {

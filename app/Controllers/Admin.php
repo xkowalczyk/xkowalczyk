@@ -16,6 +16,9 @@ class Admin extends Controller
 
     public function index()
     {
-
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
     }
 }

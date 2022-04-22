@@ -1,5 +1,5 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="<?= esc(base_url()) ?>/apis/ProductApi.js"></script>
+<script src="<?= esc(base_url()) ?>/apis/productApi.js"></script>
 <link href="<?= esc(base_url()) ?>/css/style-global.css" rel="stylesheet" type="text/css">
 <link href="<?= esc(base_url()) ?>/css/product/style-product.css" rel="stylesheet" type="text/css">
 <link href="<?= esc(base_url()) ?>/css/import.css" rel="stylesheet" type="text/css">

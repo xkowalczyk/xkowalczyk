@@ -20,12 +20,13 @@ class UserModel extends Model
     {
         $this->getConnect();
         $this->builder->select()
-                      ->where('user_email', $userEmail);
+            ->where('user_email', $userEmail);
 
         return $this->builder->get();
     }
 
-    public function putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword){
+    public function putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword)
+    {
         $this->getConnect();
         $data = [
             'user_name' => $userName,
@@ -36,6 +37,13 @@ class UserModel extends Model
         ];
 
         $this->builder->insert($data);
-        //$this->builder->replace(['user_address_id' => $this->builder->selectMax('user_id')->get()->getRowArray()['user_id']], ['user_id', $this->builder->selectMax('user_id')->get()->getRowArray()['user_id']]);
+    }
+
+    public function editUser($userId, $editParameters)
+    {
+        $this->getConnect();
+        $this->builder->where('user_id', $userId);
+        $this->builder->update($editParameters);
+        $this->builder->get();
     }
 }

@@ -48,4 +48,17 @@ class ProductModel extends Model
         $this->builder->where('item_subcategory_id', $productSubCategory);
         return $this->builder->get();
     }
+
+    public function putProduct($productParameters)
+    {
+        $this->getConnect();
+        $this->builder->insert($productParameters);
+    }
+
+    public function removeProduct($productId)
+    {
+        $this->getConnect();
+        $this->builder->where('item_id', $productId)->delete();
+        $this->builder->get();
+    }
 }

@@ -61,10 +61,9 @@ class UserService
 
     public function registerCheck($userEmail)
     {
-        if(isset($this->getSingleUser($userEmail)[0])){
+        if (isset($this->getSingleUser($userEmail)[0])) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -86,7 +85,8 @@ class UserService
         }
     }
 
-    public function putNewConfirmStatus($userEmail, $status = 0){
+    public function putNewConfirmStatus($userEmail, $status = 0)
+    {
         $this->confirmUserModel->putNewConfirmStatus($userEmail, $status);
     }
 
@@ -105,7 +105,13 @@ class UserService
         }
     }
 
-    public function putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword){
+    public function putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword)
+    {
         $this->userModel->putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword);
+    }
+
+    public function editUser($userId, $editData)
+    {
+        $this->userModel->editUser($userId, $editData);
     }
 }

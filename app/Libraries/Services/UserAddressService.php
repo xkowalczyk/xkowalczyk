@@ -28,9 +28,9 @@ class UserAddressService
         foreach ($convertArrayObject as $object) {
             $addressArray[$arrayIndex] = new Address(
                 $object['user_address_id'],
-                $object['user_address_user'],
                 $object['user_address_city'],
                 $object['user_address_homenumber'],
+                $object['user_address_street'],
                 $object['user_address_postcode']
             );
             $arrayIndex++;
@@ -38,9 +38,19 @@ class UserAddressService
         return $addressArray;
     }
 
-    public function putAddress($userEmail, $addressCity, $addressHomeNumber, $addressStreet, $addressPostCode)
+    public function putAddress($addressParameteres)
     {
-        $this->addressModel->putAddress($userEmail, $addressCity, $addressHomeNumber, $addressStreet, $addressPostCode);
+        $this->addressModel->putAddress($addressParameteres);
+    }
+
+    public function removeAddress($addressId)
+    {
+        $this->addressModel->removeAddress($addressId);
+    }
+
+    public function editAddress($addressId, $editData)
+    {
+        $this->addressModel->editAddress($addressId, $editData);
     }
 
     public function getAllAddress()
@@ -48,8 +58,13 @@ class UserAddressService
         return $this->convertToArrayAddress($this->addressModel->getAllAddress());
     }
 
-    public function getSingleAddress($userEmail)
+    public function getSingleAddress($addressId)
     {
-        return $this->convertToArrayAddress($this->addressModel->getSingleAddress($userEmail))[0];
+        return $this->convertToArrayAddress($this->addressModel->getSingleAddress($addressId));
+    }
+
+    public function getUserAddress($userId)
+    {
+        return $this->convertToArrayAddress($this->addressModel->getUserAddress($userId));
     }
 }

@@ -1,0 +1,13 @@
+.orderconfirm_list_table{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-spacing:15px 30px;
+}
+
+.orderconfirm_statusinfo{
+    text-align: center;
+}
+
+.orderconfirm_address{
+    text-align: center;
+}

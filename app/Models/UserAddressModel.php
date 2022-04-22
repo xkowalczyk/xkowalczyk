@@ -21,23 +21,35 @@ class UserAddressModel extends Model
         return $this->builder->select()->get();
     }
 
-    public function getSingleAddress($userEmail)
-    {
+    public function getUserAddress($userId){
         $this->getConnect();
-        return $this->builder->where('user_address_user', $userEmail)->get();
+        return $this->builder->where('user_address_user_id', $userId)->get();
     }
 
-    public function putAddress($userEmail, $addressCity, $addressHomeNumber, $addressStreet, $addressPostCode)
+    public function getSingleAddress($addressId)
     {
         $this->getConnect();
-        $data = [
-            'user_address_user' => $userEmail,
-            'user_address_street' => $addressStreet,
-            'user_address_city' => $addressCity,
-            'user_address_homenumber' => $addressHomeNumber,
-            'user_address_postcode' => $addressPostCode
-        ];
+        return $this->builder->where('user_address_id', $addressId)->get();
+    }
 
-        $this->builder->insert($data);
+    public function putAddress($addressParameters)
+    {
+        $this->getConnect();
+        $this->builder->insert($addressParameters);
+    }
+
+    public function removeAddress($addressId)
+    {
+        $this->getConnect();
+        $this->builder->where('user_address_id', $addressId)->delete();
+        $this->builder->get();
+    }
+
+    public function editAddress($addressId, $editParameters){
+        $this->getConnect();
+
+        $this->builder->where('user_address_id', $addressId)
+            ->update($editParameters);
+        $this->builder->get();
     }
 }

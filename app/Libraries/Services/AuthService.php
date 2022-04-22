@@ -51,6 +51,7 @@ class AuthService
     public function checkUserPassword($userEmail, $userPassword)
     {
         $trueUserPassword = $this->userService->getUserPassword($userEmail);
+        
         if (password_verify($userPassword, $trueUserPassword) == true) {
             return true;
         } else {
