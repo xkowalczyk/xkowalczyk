@@ -6,7 +6,7 @@
 <body>
     <div class="body_productlist">
         <?php if($productList != null){ ?>
-        <form action="<?= esc(base_url('neworder'))?>" method="post">
+        <form action="<?= esc(base_url('NewOrder'))?>" method="post">
             <input type="hidden" name="order-token" value="order">
             <?php foreach($productList as $item): ?>
                 <div class="body_productlist_item">

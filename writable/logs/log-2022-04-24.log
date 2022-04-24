@@ -1,0 +1,155 @@
+ERROR - 2022-04-24 10:39:58 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 10:39:58 --> Call to a member function getResultArray() on bool
+#0 C:\xampp\htdocs\xkowalczyk\app\Libraries\Services\ProductService.php(63): App\Libraries\Services\ProductService->convertToArrayProduct(false)
+#1 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(66): App\Libraries\Services\ProductService->getChoseProducts(Array)
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('22')
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#4 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-04-24 10:41:31 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 10:41:31 --> Call to a member function getResultArray() on bool
+#0 C:\xampp\htdocs\xkowalczyk\app\Libraries\Services\ProductService.php(63): App\Libraries\Services\ProductService->convertToArrayProduct(false)
+#1 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(66): App\Libraries\Services\ProductService->getChoseProducts(Array)
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('22')
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#4 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-04-24 10:47:32 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 10:47:32 --> Call to a member function getResultArray() on bool
+#0 C:\xampp\htdocs\xkowalczyk\app\Libraries\Services\ProductService.php(63): App\Libraries\Services\ProductService->convertToArrayProduct(false)
+#1 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(66): App\Libraries\Services\ProductService->getChoseProducts(Array)
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('22')
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#4 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#6 {main}
+ERROR - 2022-04-24 10:48:13 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 10:48:13 --> foreach() argument must be of type array|object, null given
+#0 C:\xampp\htdocs\xkowalczyk\app\Views\UserAccount\modules\checkOrderModule.php(14): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argum...', 'C:\\xampp\\htdocs...', 14)
+#1 C:\xampp\htdocs\xkowalczyk\system\View\View.php(210): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\xkowalczyk\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\xampp\htdocs\xkowalczyk\system\Common.php(1089): CodeIgniter\View\View->render('UserAccount/mod...', Array, true)
+#4 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(106): view('UserAccount/mod...', Array)
+#5 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('22')
+#6 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#7 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+ERROR - 2022-04-24 10:48:52 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 10:58:42 --> syntax error, unexpected token "}"
+#0 C:\xampp\htdocs\xkowalczyk\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('account/checkor...')
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('account/checkor...')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:00:27 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:00:32 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:00:32 --> Attempt to read property "user_email" on array
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(116): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp\\htdocs...', 116)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('14')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-04-24 11:00:56 --> syntax error, unexpected token "=", expecting "," or ";"
+#0 C:\xampp\htdocs\xkowalczyk\system\Router\Router.php(175): CodeIgniter\Router\Router->autoRoute('account/checkor...')
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(726): CodeIgniter\Router\Router->handle('account/checkor...')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(368): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:01:08 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:01:08 --> Attempt to read property "user_email" on array
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(116): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp\\htdocs...', 116)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('14')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:01:37 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:01:41 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:01:42 --> Attempt to read property "user_email" on array
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(116): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp\\htdocs...', 116)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('21')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:02:02 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:02:02 --> Undefined array key "user_email"
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(116): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp\\htdocs...', 116)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('21')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:02:11 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:02:11 --> Attempt to read property "user_email" on array
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(116): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp\\htdocs...', 116)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('21')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:02:27 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:02:57 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:02:57 --> Attempt to read property "user_id" on array
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(115): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp\\htdocs...', 115)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('21')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:03:07 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:03:21 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:03:34 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:03:34 --> Attempt to read property "user_email" on array
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(115): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read...', 'C:\\xampp\\htdocs...', 115)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('21')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:03:44 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:03:44 --> Undefined array key "user_email"
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Account.php(115): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array...', 'C:\\xampp\\htdocs...', 115)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Account->checkorder('21')
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Account))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+ERROR - 2022-04-24 11:04:02 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:04:08 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:04:22 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:04:34 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:04:45 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:05:13 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:05:14 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:05:28 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:05:54 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:06:24 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:06:27 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:06:30 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:06:49 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:06:55 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:10:27 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:10:40 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:10:45 --> Illegal parameter data types int and row for operation '='
+ERROR - 2022-04-24 11:15:32 --> Illegal parameter data types int and row for operation '='
+CRITICAL - 2022-04-24 11:26:23 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Error.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', 'C:\\xampp\\htdocs...', 20)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Error->index()
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Error))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2022-04-24 11:26:25 --> Trying to access array offset on value of type null
+#0 C:\xampp\htdocs\xkowalczyk\app\Controllers\Error.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to acces...', 'C:\\xampp\\htdocs...', 20)
+#1 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(832): App\Controllers\Error->index()
+#2 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Error))
+#3 C:\xampp\htdocs\xkowalczyk\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\xkowalczyk\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 {main}

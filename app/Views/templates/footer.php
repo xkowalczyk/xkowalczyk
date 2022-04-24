@@ -1,7 +1,7 @@
 
 
 <div class="footer">
-    <p>© xkowalczyk 2002 - 2021</p>
+    <p>© xkowalczyk 2002 - 2022</p>
 </div>
 </body>
 

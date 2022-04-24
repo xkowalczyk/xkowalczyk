@@ -35,7 +35,7 @@ helper('html');
             </div>
 
             <div class="header_top_search">
-                <form method="GET" action="<?= esc(base_url()) ?>/productlist/filter" class="header_top_search_searchform">
+                <form method="GET" action="<?= esc(base_url()) ?>/ProductList/filter" class="header_top_search_searchform">
                     <input type="text" name="search_item" class="header_top_search_searchform_searchinput">
                     <input type="checkbox" name="item_withdesc">
                     <input type="submit">
@@ -65,7 +65,7 @@ helper('html');
             <div class="header_down_menu">
 
                 <?php if (isset($category)) foreach ($category as $categoryItem) : ?>
-                    <div class="header_down_menu_item" onclick='location.href="<?= esc(base_url()) ?>/productlist/filter/c-<?= esc($categoryItem['category_id']) ?>"'>
+                    <div class="header_down_menu_item" onclick='location.href="<?= esc(base_url()) ?>/ProductList/filter/c-<?= esc($categoryItem['category_id']) ?>"'>
                         <div class="header_down_menu_item_ico">
                             <?= img("graph/category/{$categoryItem['category_photo']}", false, ['width' => '50', 'height' => '50']); ?>
                         </div>

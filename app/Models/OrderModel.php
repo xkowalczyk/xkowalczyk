@@ -51,4 +51,10 @@ class OrderModel extends Model
         $this->builder->update($orderParameters);
         $this->builder->get();
     }
+
+    public function putNewOrder($orderParameters)
+    {
+        $this->getConnect();
+        $this->builder->insert($orderParameters);
+    }
 }

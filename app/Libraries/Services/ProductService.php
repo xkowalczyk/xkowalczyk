@@ -23,6 +23,7 @@ class ProductService
 
     private function convertToArrayProduct($mysqlObject)
     {
+        if($mysqlObject == null){ return; }
         $convertArrayObject = $mysqlObject->getResultArray();
         $productArray = array();
         $arrayIndex = 0;

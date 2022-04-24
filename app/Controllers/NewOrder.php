@@ -3,11 +3,14 @@
 namespace App\Controllers;
 
 use App\Libraries\Address;
+use App\Libraries\PayForm;
 use App\Libraries\Services\BinService;
+use App\Libraries\Services\OrderService;
 use App\Libraries\Services\ProductService;
 use App\Libraries\Services\SessionService;
 use App\Libraries\Services\SuppliersService;
 use App\Libraries\Services\UserAddressService;
+use App\Libraries\Services\TempAddressService;
 use App\Libraries\Services\UserService;
 use CodeIgniter\Controller;
 
@@ -18,7 +21,10 @@ class NewOrder extends Controller
     private $sessionService;
     private $userService;
     private $userAddressService;
+    private $tempAddressService;
     private $suppliersService;
+    private $orderService;
+    private $payForm;
 
     public function __construct()
     {
@@ -27,7 +33,10 @@ class NewOrder extends Controller
         $this->sessionService = new SessionService();
         $this->userService = new UserService();
         $this->userAddressService = new UserAddressService();
+        $this->tempAddressService = new TempAddressService();
         $this->suppliersService = new SuppliersService();
+        $this->orderService = new OrderService();
+        $this->payForm = new PayForm();
     }
 
     public function index()
@@ -88,6 +97,8 @@ class NewOrder extends Controller
         $orderProduct = $this->binService->getBinItems();
         $productCount = array();
         $fullPrice = 0;
+        $userAddress = null;
+        $isTemp = null;
 
         if ($orderProduct == null) {
             $this->sessionService->setFlashData('errorData', ['errorName' => 'Zamówienie', 'errorDetails' => 'Próbujesz złożyc nie autoryzacyjne zamówienie z brakiem produktów', 'errorToPage' => 'home']);
@@ -100,25 +111,38 @@ class NewOrder extends Controller
         }
 
         if ($this->request->getPost('addressType') != 'on') {
-            $userAddress = $this->userAddressService->getSingleAddress($this->request->getPost('address-option'));
+            $userAddress = $this->userAddressService->getSingleAddress($this->request->getPost('address-option'))[0];
+            $isTemp = 1;
         } else {
-            $userAddress = new Address(
-                null,
-                $this->request->getPost('address_city'),
-                $this->request->getPost('address_homenumber'),
-                $this->request->getPost('address_street'),
-                $this->request->getPost('address_postcode')
+            $addressParameters = array(
+                'user_address_user' => $this->userService->getSingleUser($this->sessionService->getSingleSession('userLogged'))[0]->user_email,
+                'user_address_user_id' => $userId,
+                'user_address_street' => $this->request->getPost('address_street'),
+                'user_address_city' => $this->request->getPost('address_city'),
+                'user_address_homenumber' => $this->request->getPost('address_homenumber'),
+                'user_address_postcode' => $this->request->getPost('address_postcode')
             );
+
+            $this->tempAddressService->putAddress($addressParameters);
+            $userAddress = $this->tempAddressService->getSingleAddress($this->tempAddressService->getNewAddressId($userId))[0];
+            $isTemp = 0;
         }
 
+        $user = $this->userService->getSingleUser($this->sessionService->getSingleSession('userLogged'))[0];
+
         $SystemLang['fullPrice'] = $fullPrice;
-        $SystemLang['user'] = $this->userService->getSingleUser($this->sessionService->getSingleSession('userLogged'))[0];
+        $SystemLang['user'] = $user;
         $SystemLang['orderProduct'] = $orderProduct;
         $SystemLang['productCount'] = $productCount;
         $SystemLang['supplier'] = $this->suppliersService->getSingleSupplier($this->request->getPost('suppliersType'))[0];
-        $SystemLang['userAddress'] = $userAddress[0];
-        
+        $SystemLang['userAddress'] = $userAddress;
+
+        $this->orderService->putNewOrder($_COOKIE['bin'], $userId, $this->request->getPost('suppliersType'), date('Y/m/d H:i:s'), '1', $fullPrice, $userAddress->address_id, $isTemp);
+
         echo view('Order/newOrderConfirm.php', $SystemLang);
-        //$this->sessionService->removeSession('neworder-token');
+        $this->payForm->generatePayForm($user->user_email, $user->user_name, $this->orderService->getNewOrderId(), "Zamówienie", "10");
+        if (isset($_SESSION['neworder-token'])) {
+            //session_destroy('neworder-token');
+        }
     }
 }

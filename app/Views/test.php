@@ -1,57 +1,32 @@
 <?php
-$domain = "secure";
-$pos_id = "434469";
-$poskey2 = "0f1d024de9a35c0be24e9c901acae6dd";
-$currencyCode = "PLN";
-$desc = "Płatność za zamówienie";
-$email = $userEmail;
-$amount = $totalPrice;
-$pay_type = "";
-$validityTime = 3600;
-$customerIp = "127.0.0.1";
-$date = date_create();
-$timestamp = date_timestamp_get($date);
+$FORMULARZ = [
+"SEKRET" => "NEl6Z1A1VHJmRjBSZ2xraU04ajd2V2Y4TElZSDlwSHJQd3Z5NkxVekk4Yz0,",
+"KWOTA" => "100",
+"NAZWA_USLUGI" => "TEST",
+"ADRES_WWW" => "http://xkowalczyk.pl/api/payment",
+"ID_ZAMOWIENIA" => "1",
+"EMAIL" => "",
+"DANE_OSOBOWE" => "",
+"TYP" => "INIT",
+];
 
-$tablica = array(
-    "continueUrl" => "http://xkowalczyk.pl/payment/api",
-    "notifyUrl" => "http://xkowalczyk.pl/payment/api",
-    "products[0].name" => "Zakupy",
-    "products[0].quantity" => "1",
-    "products[0].unitPrice" => "1",
-    "buyer.firstName" => "",
-    "buyer.lastName" => "",
-    "buyer.language" => "",
-    "buyer.phone" => "",
+$FORMULARZ["HASH"]=hash("sha256", "TKfqVda3" . ";" . $FORMULARZ["KWOTA"] . ";" . $FORMULARZ["NAZWA_USLUGI"] . ";" . $FORMULARZ["ADRES_WWW"] . ";" . $FORMULARZ["ID_ZAMOWIENIA"] . ";" . $FORMULARZ["SEKRET"]);
+$ch = curl_init();
 
-    "buyer.email" => $email,
-    "currencyCode" => $currencyCode,
-    "customerIp" => $customerIp,
-    "description" => $desc,
-    "merchantPosId" => $pos_id,
-    "totalAmount" => $amount,
-    "validityTime" => $validityTime,
-    "extOrderId" => $timestamp,
-);
-if ($pay_type !== "") {
-    $tablica['payMethods.payMethod.type'] = "PBL";
-    $tablica['payMethods.payMethod.value'] = $pay_type;
-};
-ksort($tablica);
-$emptyRemoved = array_filter($tablica);
-ksort($emptyRemoved);
-$zmienna = '';
-foreach ($emptyRemoved as $key => $value) {
-    $zmienna = $zmienna . $key . "=" . urlencode($value) . "&";
+curl_setopt($ch, CURLOPT_URL,"https://platnosc.hotpay.pl/");
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS,$FORMULARZ);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$server_output = curl_exec($ch);
+curl_close ($ch);
+if(!empty($server_output)){
+$JSON=json_decode($server_output,true);
+if(!empty($JSON["STATUS"])){
+if($JSON["STATUS"] == true){
+echo '<a href="'.$JSON["URL"].'">Zapłać</a>';
+}else{
+// BŁĄD
+echo $JSON["WIADOMOSC"];
 }
-$newsig = hash('sha256', $zmienna . $poskey2);
-echo '
-<form method="post" action="https://' . $domain . '.snd.payu.com/api/v2_1/orders">';
-foreach ($emptyRemoved as $key => $value) {
-    echo '
-    <input type="hidden" name="' . $key . '"  value="' . $value . '">';
-};
-echo '
-    <input type="hidden" name="OpenPayu-Signature" value="sender=' . $tablica["merchantPosId"] . ';algorithm=SHA-256;signature=' . $newsig . '">
-    <button type="submit" formtarget="_self" >Zapłać</button>
-</form >
-';
+}
+}

@@ -9,7 +9,7 @@
 <h2 style="text-align: center;">Nowe zamówienie</h2>
 
 <div class="orderformd">
-    <form action="<?= esc(base_url('neworder/confirmation'))?>" method="post" class="orderform">
+    <form action="<?= esc(base_url('NewOrder/confirmation'))?>" method="post" class="orderform">
         <input type="hidden" name="user_id" value="<?= esc($userId) ?>">
         <input type="hidden" name="order_token" value="order-token">
         <?php $index = 0; foreach($orderProduct as $item): ?>

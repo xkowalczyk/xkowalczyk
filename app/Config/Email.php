@@ -26,14 +26,14 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $userAgent = 'xkowalczyk';
+    public $userAgent = 'CodeIgniter';
 
     /**
      * The mail sending protocol: mail, sendmail, smtp
      *
      * @var string
      */
-    public $protocol = 'smpt';
+    public $protocol = 'mail';
 
     /**
      * The server path to Sendmail.
@@ -47,35 +47,35 @@ class Email extends BaseConfig
      *
      * @var string
      */
-    public $SMTPHost = 'server382046.nazwa.pl';
+    public $SMTPHost;
 
     /**
      * SMTP Username
      *
      * @var string
      */
-    public $SMTPUser = 'xkowalczyk@server382046.nazwa.pl';
+    public $SMTPUser;
 
     /**
      * SMTP Password
      *
      * @var string
      */
-    public $SMTPPass = 'zaq1@WSX';
+    public $SMTPPass;
 
     /**
      * SMTP Port
      *
      * @var int
      */
-    public $SMTPPort = 587;
+    public $SMTPPort = 25;
 
     /**
      * SMTP Timeout (in seconds)
      *
      * @var int
      */
-    public $SMTPTimeout = 10;
+    public $SMTPTimeout = 5;
 
     /**
      * Enable persistent SMTP connections
@@ -131,7 +131,7 @@ class Email extends BaseConfig
      *
      * @var int
      */
-    public $priority = 1;
+    public $priority = 3;
 
     /**
      * Newline character. (Use “\r\n” to comply with RFC 822)
@@ -166,5 +166,5 @@ class Email extends BaseConfig
      *
      * @var bool
      */
-    public $DSN = true;
+    public $DSN = false;
 }

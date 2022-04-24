@@ -32,10 +32,10 @@ class Database extends Config
      */
     public $default = [
         'DSN'      => '',
-        'hostname' => 'localhost',
-        'username' => 'root',
-        'password' => 'root',
-        'database' => 'xkowalczykshopdatabase',
+        'hostname' => 'mariadb106.server382046.nazwa.pl',
+        'username' => 'server382046_xkowalczykshopdatabase',
+        'password' => 'zaq1@WSX',
+        'database' => 'server382046_xkowalczykshopdatabase',
         'DBDriver' => 'MySQLi',
         'DBPrefix' => '',
         'pConnect' => false,

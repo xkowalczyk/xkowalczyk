@@ -18,7 +18,7 @@ class Home extends Controller
     {
 
         $SystemLang['hot_product'] = $this->productService->getHotProduct();
-        $SystemLang['featured_product'] = $this->productService->getFeaturedProduct();
+        //$SystemLang['featured_product'] = $this->productService->getFeaturedProduct();
 
         echo view('templates/header.php');
         echo view('Home/index.php', $SystemLang);

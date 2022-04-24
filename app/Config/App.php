@@ -23,7 +23,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $baseURL = 'http://xkowalczyk.pl';
+    public $baseURL = 'http://localhost/';
 
     /**
      * --------------------------------------------------------------------------
@@ -69,7 +69,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $defaultLocale = 'pl';
+    public $defaultLocale = 'en';
 
     /**
      * --------------------------------------------------------------------------
@@ -96,7 +96,7 @@ class App extends BaseConfig
      *
      * @var string[]
      */
-    public $supportedLocales = ['pl'];
+    public $supportedLocales = ['en'];
 
     /**
      * --------------------------------------------------------------------------
@@ -108,7 +108,7 @@ class App extends BaseConfig
      *
      * @var string
      */
-    public $appTimezone = 'Europe/Warsaw';
+    public $appTimezone = 'America/Chicago';
 
     /**
      * --------------------------------------------------------------------------

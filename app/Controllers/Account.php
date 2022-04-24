@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Libraries\Services\OrderService;
+use App\Libraries\PayForm;
 use CodeIgniter\Controller;
+use App\Libraries\Services\OrderService;
+use App\Libraries\Services\ProductService;
 use App\Libraries\Services\SessionService;
 use App\Libraries\Services\SuppliersService;
 use App\Libraries\Services\UserAddressService;
@@ -16,6 +18,8 @@ class Account extends Controller
     private $userAddressService;
     private $orderService;
     private $suppliersService;
+    private $productService;
+    private $payForm;
 
     public function __construct()
     {
@@ -24,6 +28,8 @@ class Account extends Controller
         $this->userAddressService = new UserAddressService();
         $this->orderService = new OrderService();
         $this->suppliersService = new SuppliersService();
+        $this->productService = new ProductService();
+        $this->payForm = new PayForm();
     }
 
     public function index()
@@ -55,37 +61,60 @@ class Account extends Controller
     {
         if ($this->sessionService->checkIssetSession('userLogged') == false) {
             return redirect()->to(base_url('login'));
-        } else if ($orderId == null){
+        } else if ($orderId == null) {
             return redirect()->to(base_url('orders'));
         }
 
         $order = $this->orderService->getSingleOrder($orderId)[0];
+        $orderProduct = $this->productService->getChoseProducts(explode(',',$order->order_product));
+        $user = $this->userService->getSingleUser($this->sessionService->getSingleSession('userLogged'))[0];
 
-        if($order == null){
+        if ($order == null) {
             return redirect()->to(base_url('orders'));
         }
 
-        if($order->order_client_id != $this->userService->getSingleUser($this->sessionService->getSingleSession('userLogged'))[0]->user_id){
+        if ($order->order_client_id != $this->userService->getSingleUser($this->sessionService->getSingleSession('userLogged'))[0]->user_id) {
             $this->sessionService->setFlashData('errorData', ['errorName' => 'Lista zamówień', 'errorDetails' => 'Nieautoryzowana próba podglądu zamówienia', 'errorToPage' => 'account']);
             return redirect()->to(base_url('error'));
         }
 
-        $orderStatus = null;
-        switch($order->order_status){
-            case "1":{
+        switch ($order->order_status) {
+            case "1": {
                 $orderStatus = "Zamówienie złożone: oczekiwanie na płatność";
-            }
+            }break;
+            case "2": {
+                $orderStatus = "Zamówienie złożone: Płatność zaksięgowana";
+            }break;
+            case "3": {
+                $orderStatus = "Zamówienie złożone: Płatność anulowana";
+            }break;
+            case "4": {
+                $orderStatus = "Zamówienie złożone: Płatność w toku";
+            }break;
+            case "5": {
+                $orderStatus = "Zamówienie złożone: Wysłane";
+            }break;
+            case "6": {
+                $orderStatus = "Zamówienie zostało anulowane";
+            }break;
+        }
+
+        if ($this->suppliersService->getSingleSupplier($order->order_shipping) != null) {
+            $SystemLang['supplier'] = $this->suppliersService->getSingleSupplier($order->order_shipping)[0];
         }
 
         $SystemLang['orderStatus'] = $orderStatus;
         $SystemLang['order'] = $order;
-        if($this->suppliersService->getSingleSupplier($order->order_shipping) != null){
-            $SystemLang['supplier'] = $this->suppliersService->getSingleSupplier($order->order_shipping);
-        }
+        $SystemLang['orderProduct'] = $orderProduct;
+        $SystemLang['orderAmount'] = $order->order_amount;
 
         echo view('templates/header.php');
         echo view('UserAccount/header.php');
         echo view('UserAccount/modules/checkOrderModule.php', $SystemLang);
+
+        if($order->order_status == '1' || $order->order_status == '3'){
+            $this->payForm->generatePayForm($user->user_email, $user->user_name, $order->order_id, 'Płatność za zamówienie', '10');
+        }
     }
 
     public function personal()

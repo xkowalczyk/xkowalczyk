@@ -7,6 +7,7 @@ use CodeIgniter\Controller;
 use App\Libraries\Services\SessionService;
 use App\Libraries\Services\UserAddressService;
 use App\Libraries\Services\UserService;
+use App\Libraries\Services\OrderService;
 
 class Api extends Controller
 {
@@ -14,6 +15,7 @@ class Api extends Controller
     private $sessionService;
     private $binService;
     private $userService;
+    private $orderService;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class Api extends Controller
         $this->sessionService = new SessionService();
         $this->binService = new BinService();
         $this->userService = new UserService();
+        $this->orderService = new OrderService();
     }
 
     public function index()
@@ -41,7 +44,29 @@ class Api extends Controller
 
     public function payment()
     {
-
+        if (!empty($_POST)) {
+            if (
+                !empty($_POST["KWOTA"]) &&
+                !empty($_POST["ID_PLATNOSCI"]) &&
+                !empty($_POST["ID_ZAMOWIENIA"]) &&
+                !empty($_POST["STATUS"]) &&
+                !empty($_POST["SEKRET"]) &&
+                !empty($_POST["SECURE"]) &&
+                !empty($_POST["HASH"])
+            ) {
+                if (hash("sha256", "TKfqVda3;" . $_POST["KWOTA"] . ";" . $_POST["ID_PLATNOSCI"] . ";" . $_POST["ID_ZAMOWIENIA"] . ";" . $_POST["STATUS"] . ";" . $_POST["SECURE"] . ";" . $_POST["SEKRET"]) == $_POST["HASH"]) {
+                    if ($_POST["STATUS"] == "SUCCESS") {
+                        $this->orderService->editOrderStatus($this->request->getPost('ID_ZAMOWIENIA'), 2);
+                    } else if ($_POST["STATUS"] == "FAILURE") {
+                        $this->orderService->editOrderStatus($this->request->getPost('ID_ZAMOWIENIA'), 3);
+                    } else if ($_POST["STATUS"] == "PENDING") {
+                        $this->orderService->editOrderStatus($this->request->getPost('ID_ZAMOWIENIA'), 4);
+                    }
+                }
+            } else {
+                echo "BRAK WYMAGANYCH DANYCH";
+            }
+        }
     }
 
     public function admin()
@@ -93,7 +118,7 @@ class Api extends Controller
                     $address_postcode = $this->request->getPost('postcode');
                     $address_homenumber = $this->request->getPost('homenumber');
 
-                    if($address_city == '' || $address_street == '' || $address_postcode == '' || $address_homenumber == ''){
+                    if ($address_city == '' || $address_street == '' || $address_postcode == '' || $address_homenumber == '') {
                         return 'error_novalue';
                     }
 
@@ -113,25 +138,28 @@ class Api extends Controller
                     $address_postcode = $this->request->getPost('postcode');
                     $address_homenumber = $this->request->getPost('homenumber');
 
-                    if($address_city == '' || $address_street == '' || $address_postcode == '' || $address_homenumber == ''){
+                    if ($address_city == '' || $address_street == '' || $address_postcode == '' || $address_homenumber == '') {
                         return 'error_novalue';
                     }
 
                     $addressParameters = array('user_address_user_id' => $user_id, 'user_address_user' => $this->sessionService->getSingleSession('userLogged'), 'user_address_street' => $address_street, 'user_address_city' => $address_city, 'user_address_postcode' => $address_postcode, 'user_address_homenumber' => $address_homenumber);
                     $this->userAddressService->putAddress($addressParameters);
-            } break;
-            case "removeAddress":{
-                $address_id = $this->request->getPost('value');
-                
-                if($address_id == ''){
-                    return 'error_novalue';
-                } 
+                }
+                break;
+            case "removeAddress": {
+                    $address_id = $this->request->getPost('value');
 
-                $this->userAddressService->removeAddress($address_id);
-            } break;
-            case "userLogout":{
-                $this->sessionService->removeSession('userLogged');
-            }break;
+                    if ($address_id == '') {
+                        return 'error_novalue';
+                    }
+
+                    $this->userAddressService->removeAddress($address_id);
+                }
+                break;
+            case "userLogout": {
+                    $this->sessionService->removeSession('userLogged');
+                }
+                break;
             default: {
                     return "error_invalidaction";
                 }

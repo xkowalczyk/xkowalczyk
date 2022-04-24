@@ -1,6 +1,6 @@
 function logout(){
     $.ajax({
-        url:"http://localhost/api",
+        url:"http://xkowalczyk.pl/api",
         type: "POST",
         dataType: "JSON",
         data: {action: "userLogout", value: ''},
