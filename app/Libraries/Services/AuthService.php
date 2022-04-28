@@ -66,8 +66,16 @@ class AuthService
 
     public function putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword, $addressCity, $addressHomeNumber, $addressStreet, $addressPostCode)
     {
+        $addressData = array(
+            'user_address_user' => $userEmail,
+            'user_address_city' => ucfirst($addressCity),
+            'user_address_homenumber' => $addressHomeNumber,
+            'user_address_street' => $addressStreet,
+            'user_address_postcode' => $addressPostCode
+        );
+
         $this->userService->putUser(ucfirst($userName), ucfirst($userLastname), $userEmail, $userLogin, password_hash($userPassword, PASSWORD_DEFAULT));
-        $this->addressService->putAddress($userEmail, ucfirst($addressCity), $addressHomeNumber, $addressStreet, $addressPostCode);
+        $this->addressService->putAddress($addressData);
         $this->userService->putNewConfirmStatus($userEmail);
     }
 }

@@ -23,8 +23,22 @@ class BlackListModel extends Model
     public function getSingleBlackListStatus($userEmail)
     {
         $this->getConnect();
-        $this->builder->selectCount('blacklist_id')
+        $this->builder->select()
                       ->where('blacklist_user_email', $userEmail);
         return $this->builder->get();
+    }
+
+    public function putUser($userId){
+        $this->getConnect();
+        $data = array(
+            'blacklist_user_email' => $userId
+        );
+        $this->builder->insert($data);
+    }
+
+    public function removeUser($userEmail)
+    {
+        $this->getConnect();
+        $this->builder->delete(['blacklist_user_email' => $userEmail]);
     }
 }

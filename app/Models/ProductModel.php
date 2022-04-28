@@ -61,4 +61,12 @@ class ProductModel extends Model
         $this->builder->where('item_id', $productId)->delete();
         $this->builder->get();
     }
+
+    public function editProduct($productId, $productParameters)
+    {
+        $this->getConnect();
+        $this->builder->where('item_id', $productId);
+        $this->builder->update($productParameters);
+        $this->builder->get();
+    }
 }

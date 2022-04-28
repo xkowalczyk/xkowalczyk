@@ -49,6 +49,11 @@ class ProductService
         return $mysqlObject->getResultArray();
     }
 
+    public function editProduct($productId, $productParameters)
+    {
+        $this->productModel->editProduct($productId, $productParameters);
+    }
+
     public function getAllProducts()
     {
         return $this->convertToArrayProduct($this->productModel->getAllProducts());

@@ -2,9 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Libraries\Services\CategoryService;
 use App\Libraries\Services\OrderService;
 use App\Libraries\Services\ProductService;
 use App\Libraries\Services\SuppliersService;
+use App\Libraries\Services\TempAddressService;
+use App\Libraries\Services\UserAddressService;
 use App\Libraries\Services\UserService;
 use CodeIgniter\Controller;
 use App\Libraries\Services\SessionService;
@@ -16,6 +19,9 @@ class Admin extends Controller
     private $productService;
     private $userService;
     private $suppliersService;
+    private $userAddressService;
+    private $tempAddressService;
+    private $categoryService;
 
     public function __construct()
     {
@@ -24,6 +30,9 @@ class Admin extends Controller
         $this->productService = new ProductService();
         $this->userService = new UserService();
         $this->suppliersService = new SuppliersService();
+        $this->userAddressService = new UserAddressService();
+        $this->tempAddressService = new TempAddressService();
+        $this->categoryService = new CategoryService();
     }
 
     public function index()
@@ -54,6 +63,13 @@ class Admin extends Controller
         $order = $this->orderService->getSingleOrder($orderId)[0];
         $orderProduct = $this->productService->getChoseProducts(explode(',',$order->order_product));
         $user = $this->userService->getSingleUser($order->order_client_id);
+
+        if ($order->order_address_type == 0)
+        {
+            $shippingAddress = $this->tempAddressService->getSingleAddress($order->order_address_id);
+        } else if($order->order_address_type == 1){
+            $shippingAddress = $this->userAddressService->getSingleAddress($order->order_address_id);
+        }
 
         if ($order == null) {
             return redirect()->to(base_url('orders'));
@@ -88,8 +104,70 @@ class Admin extends Controller
         $SystemLang['order'] = $order;
         $SystemLang['orderProduct'] = $orderProduct;
         $SystemLang['orderAmount'] = $order->order_amount;
-    print_r($order);
+        $SystemLang['shippingAddress'] = $shippingAddress[0];
         echo view('Admin/header.php');
         echo view('Admin/modules/adminOrderManagerModule.php', $SystemLang);
+    }
+
+    public function users()
+    {
+        $users = $this->userService->getAllUsers();
+
+        $SystemLang['users'] = $users;
+        echo view('Admin/header.php');
+        echo view('Admin/modules/adminUsersModule.php', $SystemLang);
+
+    }
+
+    public function usermanager()
+    {
+        $userId = $this->request->getPost('user-id');
+        if ($userId == null)
+        {
+            return redirect()->to(base_url('admin/users'));
+        }
+
+        $user = $this->userService->getSingleUserId($userId);
+        if ($user == null){
+            return redirect()->to(base_url('admin/users'));
+        }
+
+        $userAddress = $this->userAddressService->getUserAddress($userId);
+
+        $SystemLang['userAddress'] = $userAddress;
+        $SystemLang['user'] = $user[0];
+        echo view('Admin/header.php');
+        echo view('Admin/modules/adminUserManagerModule.php', $SystemLang);
+    }
+
+    public function products()
+    {
+        $productsList = $this->productService->getAllProducts();
+
+        $SystemLang['productsList'] = $productsList;
+        echo view('Admin/header.php');
+        echo view('Admin/modules/adminProductsModule.php', $SystemLang);
+    }
+
+    public function productmanager()
+    {
+        $productId = $this->request->getPost('product-id');
+        if ($productId == null){
+            return redirect()->to(base_url('admin/products'));
+        }
+
+        $product = $this->productService->getSingleProduct($productId);
+        if ($product == null){
+            return redirect()->to(base_url('admin/products'));
+        }
+
+        $categoryList = $this->categoryService->getCategory();
+        $subcategoryList = $this->categoryService->getAllSubCategory();
+        print_r($product);
+        $SystemLang['categoryList'] = $categoryList;
+        $SystemLang['subcategoryList'] = $subcategoryList;
+        $SystemLang['product'] = $product[0];
+        echo view('Admin/header.php');
+        echo view('Admin/modules/adminProductManagerModule.php', $SystemLang);
     }
 }

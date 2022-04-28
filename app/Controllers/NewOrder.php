@@ -106,7 +106,7 @@ class NewOrder extends Controller
         }
 
         foreach ($orderProduct as $item) {
-            array_push($productCount, [$item[0]->item_id => $this->request->getPost($item[0]->item_id)]);
+            //array_push($produSctCount, [$item[0]->item_id => $this->request->getPost($item[0]->item_id)]);
             $fullPrice = $fullPrice + ((int)$item[0]->item_price*$this->request->getPost($item[0]->item_id));
         }
 
@@ -142,7 +142,7 @@ class NewOrder extends Controller
         echo view('Order/newOrderConfirm.php', $SystemLang);
         $this->payForm->generatePayForm($user->user_email, $user->user_name, $this->orderService->getNewOrderId(), "Zamówienie", "10");
         if (isset($_SESSION['neworder-token'])) {
-            //session_destroy('neworder-token');
+            $this->sessionService->removeSession('neworder-token');
         }
     }
 }

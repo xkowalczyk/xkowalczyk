@@ -35,6 +35,9 @@ class UserAddressModel extends Model
     public function putAddress($addressParameters)
     {
         $this->getConnect();
+        $data = array(
+            'user_Address_user'
+        );
         $this->builder->insert($addressParameters);
     }
 

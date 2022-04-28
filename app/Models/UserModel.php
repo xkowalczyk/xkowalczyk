@@ -16,11 +16,28 @@ class UserModel extends Model
         $this->builder = $this->dataBaseConnect->table($this->table);
     }
 
+    public function getAllUsers()
+    {
+        $this->getConnect();
+        $this->builder->select();
+
+        return $this->builder->get();
+    }
+
     public function getSingleUser($userEmail)
     {
         $this->getConnect();
         $this->builder->select()
             ->where('user_email', $userEmail);
+
+        return $this->builder->get();
+    }
+
+    public function getSingleUserId($userId)
+    {
+        $this->getConnect();
+        $this->builder->select()
+            ->where('user_id', $userId);
 
         return $this->builder->get();
     }

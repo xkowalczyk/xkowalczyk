@@ -2,7 +2,6 @@
 <link href="<?= esc(base_url()) ?>/css/admin/style-admin-index.css" rel="stylesheet" type="text/css">
 <link href="<?= esc(base_url()) ?>/css/import.css" rel="stylesheet" type="text/css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="<?= esc(base_url()) ?>/apis/userApi/userApi.js"></script>
 
 <h2>Strona administracyjna</h2>
 

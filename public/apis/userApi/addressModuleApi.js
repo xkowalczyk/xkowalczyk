@@ -54,7 +54,7 @@ function removeAddress (address_id) {
         url:"http://xkowalczyk.pl/api",
         type: "POST",
         dataType: "JSON",
-        data: {action: "removeAddress", value: address_id},
+        data: {action: "removeUserAddress", value: address_id},
         success:function(result){
             console.log(result);
             location.reload();

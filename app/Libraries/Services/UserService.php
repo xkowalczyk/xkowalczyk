@@ -49,9 +49,19 @@ class UserService
         return $mysqlObject->getResultArray();
     }
 
+    public function getAllUsers()
+    {
+        return $this->convertToArrayUser($this->userModel->getAllUsers());
+    }
+
     public function getSingleUser($userEmail)
     {
         return $this->convertToArrayUser($this->userModel->getSingleUser($userEmail));
+    }
+
+    public function getSingleUserId($userId)
+    {
+        return $this->convertToArrayUser($this->userModel->getSingleUserId($userId));
     }
 
     public function getUserPassword($userEmail)
@@ -90,18 +100,32 @@ class UserService
         $this->confirmUserModel->putNewConfirmStatus($userEmail, $status);
     }
 
+    public function removeUserBlackList($userEmail)
+    {
+        $this->blackListModel->removeUser($userEmail);
+    }
+
     public function getAllBlackListStatus()
     {
         return $this->convertToArray($this->blackListModel->getAllBlackListStatus());
     }
 
+    public function putUserToBlackList($userEmail)
+    {
+        if ($this->getSingleBlackListStatus($userEmail) == true)
+        {
+            return "user_isset";
+        }
+        $this->blackListModel->putUser($userEmail);
+    }
+
     public function getSingleBlackListStatus($userEmail)
     {
         $blackListStatus = $this->convertToArray($this->blackListModel->getSingleBlackListStatus($userEmail));
-        if ($blackListStatus[0]['blacklist_id'] == 0) {
-            return false;
-        } elseif ($blackListStatus[0]['blacklist_id'] == 1) {
+        if ($blackListStatus != null){
             return true;
+        } else {
+            return false;
         }
     }
 
