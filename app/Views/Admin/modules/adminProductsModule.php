@@ -1,4 +1,5 @@
-<h3>Zarządzanie produktami:</h3><br>
+<h3>Zarządzanie produktami:</h3>
+<button onclick="location.href = '<?= esc(base_url('admin/addproduct')) ?>'">Dodaj nowy produkt</button><br><br>
 
 <div class="productlist">
     <?php if ($productsList != null) foreach ($productsList as $product): ?>
