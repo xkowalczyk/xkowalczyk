@@ -1,0 +1,21 @@
+2022-04-23 15:01:53,380 [      0]   INFO -        #com.intellij.idea.Main - ------------------------------------------------------ IDE STARTED ------------------------------------------------------ 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR -  
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - !bootstrap.error.title.start.failed! 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - !bootstrap.error.message.internal.error.please.refer.to.0!https://jb.gg/ide/critical-startup-errors! 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR -  
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - java.lang.OutOfMemoryError: unable to create native thread: possibly out of memory or process/resource limits reached 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.lang.Thread.start0(Native Method) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.lang.Thread.start(Thread.java:798) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.util.concurrent.ForkJoinPool.createWorker(ForkJoinPool.java:1329) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.util.concurrent.ForkJoinPool.tryAddWorker(ForkJoinPool.java:1352) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.util.concurrent.ForkJoinPool.signalWork(ForkJoinPool.java:1476) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.util.concurrent.ForkJoinPool.externalPush(ForkJoinPool.java:1903) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.util.concurrent.ForkJoinPool.externalSubmit(ForkJoinPool.java:1921) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at java.base/java.util.concurrent.ForkJoinPool.submit(ForkJoinPool.java:2476) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at com.intellij.idea.StartupUtil.start(StartupUtil.java:233) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at com.intellij.idea.Main.bootstrap(Main.java:134) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - 	at com.intellij.idea.Main.main(Main.java:82) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR -  
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - ----- 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - !bootstrap.error.message.jre.details!11.0.14.1+1-b1751.46 amd64 (JetBrains s.r.o.) 
+2022-04-23 15:01:53,415 [     35]   INFO -                         STDERR - /home/server382046/ftp/.cache/JetBrains/RemoteDev-IU/_/pid.108.temp.jbr! 

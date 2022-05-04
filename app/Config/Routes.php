@@ -34,6 +34,7 @@ $routes->get('/', 'Home::index');
 $routes->get('/s', 'Classtest::test');
 $routes->get('/product/(:num)', 'Product::index/$1');
 $routes->get('/Product/(:num)', 'Product::index/$1');
+$routes->get('/adminlogout', 'Api::adminLogout');
 
 /*
  * --------------------------------------------------------------------

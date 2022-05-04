@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Libraries\Address;
 use App\Libraries\PayForm;
 use App\Libraries\Services\BinService;
+use App\Libraries\Services\EmailService;
 use App\Libraries\Services\OrderService;
 use App\Libraries\Services\ProductService;
 use App\Libraries\Services\SessionService;
@@ -24,6 +25,7 @@ class NewOrder extends Controller
     private $tempAddressService;
     private $suppliersService;
     private $orderService;
+    private $emailService;
     private $payForm;
 
     public function __construct()
@@ -36,6 +38,7 @@ class NewOrder extends Controller
         $this->tempAddressService = new TempAddressService();
         $this->suppliersService = new SuppliersService();
         $this->orderService = new OrderService();
+        $this->emailService = new EmailService();
         $this->payForm = new PayForm();
     }
 
@@ -106,7 +109,7 @@ class NewOrder extends Controller
         }
 
         foreach ($orderProduct as $item) {
-            //array_push($produSctCount, [$item[0]->item_id => $this->request->getPost($item[0]->item_id)]);
+            array_push($productCount, [$item[0]->item_id => $this->request->getPost($item[0]->item_id)]);
             $fullPrice = $fullPrice + ((int)$item[0]->item_price*$this->request->getPost($item[0]->item_id));
         }
 
@@ -144,5 +147,9 @@ class NewOrder extends Controller
         if (isset($_SESSION['neworder-token'])) {
             $this->sessionService->removeSession('neworder-token');
         }
+
+        $this->emailService->sendOrderConfirm($user->user_email, $user->user_name, $fullPrice, $this->orderService->getNewOrderId());
+
+        $this->binService->clearBin();
     }
 }

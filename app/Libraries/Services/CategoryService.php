@@ -29,7 +29,8 @@ class CategoryService{
         return $this->subCategoryModel->getSubCategory();
     }
 
-    public function getSubCategory($categoryId){
+    public function getSubCategory($categoryId)
+    {
         $subCategory = $this->getAllSubCategory();
         $data = array();
         $arrayIndex = 0;
@@ -41,5 +42,35 @@ class CategoryService{
         }
 
         return $data;
+    }
+
+    public function removeCategory($categoryId)
+    {
+        $this->categoryModel->removeCategory($categoryId);
+    }
+
+    public function addCategory($categoryName, $categoryDescription, $categoryPhoto)
+    {
+        $this->categoryModel->addCategory($categoryName, $categoryDescription, $categoryPhoto);
+    }
+
+    public function editCategory()
+    {
+
+    }
+
+    public function removeSubCategory($categoryId)
+    {
+        $this->subCategoryModel->removeSubCategory($categoryId);
+    }
+
+    public function addSubCategory($categoryName, $categoryDescription, $categoryMain)
+    {
+        $this->subCategoryModel->addSubCategory($categoryName, $categoryDescription, $categoryMain);
+    }
+
+    public function editSubCategory()
+    {
+
     }
 }

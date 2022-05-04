@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="<?php esc(base_url())?>/css/productlist/style-productlist.css">
+
 <div class="body_productlist">
     <?php if($productList != null) foreach($productList as $product) : ?>
         <div class="body_productlist_product" onclick='location.href ="<?=esc(base_url())?>/Product/<?= esc($product->item_id) ?>"'>

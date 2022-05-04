@@ -74,6 +74,12 @@ class ProductService
         return $this->convertToArrayProduct($this->productModel->getCategoryProducts($productCategory));
     }
 
+    public function getLastAddItemId()
+    {
+        $allProducts = $this->getAllProducts();
+        return $newProductId = end($allProducts)->item_id;
+    }
+
     public function getSubCategoryProducts($productSubCategory)
     {
         return $this->convertToArrayProduct($this->productModel->getSubCategoryProducts($productSubCategory));
@@ -84,6 +90,23 @@ class ProductService
         $productId = $this->convertToArray($this->hotProductModel->getHotProduct())[0]['hot_item_product_id'];
         return $this->getSingleProduct($productId);
     }
+
+    public function addFeaturedProduct($productId)
+    {
+        $this->featuredProductModel->addFeaturedProduct($productId);
+    }
+
+    public function addProduct($productParameters)
+    {
+        $this->productModel->addProduct($productParameters);
+    }
+
+    public function removeFeaturedProduct($productId)
+    {
+        $this->featuredProductModel->removeFeaturedProduct($productId);
+    }
+
+
     public function getFeaturedProduct()
     {
         $arrayIdObject = $this->convertToArray($this->featuredProductModel->getFeaturedProducts());
@@ -138,14 +161,31 @@ class ProductService
         $returnProduct = array();
 
         foreach ($sortParameteres as $parameters) {
-            if ($parameters == 'minprice') {
-                foreach ($product as $item) {
-                    if ((int)$item->item_price >= (int)$sortParameteresArray['minprice']) {
-                        echo "s";
+            switch ($parameters){
+                case 'minprice':{
+                    foreach ($product as $item) {
+                        if ((int)$item->item_price >= (int)$sortParameteresArray['minprice']) {
+                            array_push($returnProduct, $item);
+                        }
+                    }
+                } break;
+                case 'maxprice':{
+                    foreach ($product as $item) {
+                        if ((int)$item->item_price <= (int)$sortParameteresArray['maxprice']) {
+                            array_push($returnProduct, $item);
+                        }
+                    }
+                    foreach ($returnProduct as $item ) {
+                        if ((int)$item->item_price >= (int)$sortParameteresArray['maxprice']) {
+                            array_push($returnProduct, $item);
+                        }
                     }
                 }
             }
+
         }
+
+        return $returnProduct;
     }
 
     public function getSearchProduct($searchString){

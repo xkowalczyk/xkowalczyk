@@ -21,7 +21,7 @@ class ProductList extends Controller
         $SystemLang['productList'] = $this->productService->getAllProducts();
 
         echo view('templates/header.php');
-        echo view('ProductList/categorylist.php'); 
+        echo view('ProductList/categorylist.php');
         echo view('ProductList/productlist.php', $SystemLang);
     }
 

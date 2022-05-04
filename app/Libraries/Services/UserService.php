@@ -129,6 +129,16 @@ class UserService
         }
     }
 
+    public function updateConfirmStatus($userEmail, $status)
+    {
+        $this->confirmUserModel->updateConfirmStatus($userEmail, $status);
+    }
+
+    public function getAccountType($userEmail)
+    {
+        return (bool)$this->getSingleUser($userEmail)[0]->user_permission;
+    }
+
     public function putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword)
     {
         $this->userModel->putUser($userName, $userLastname, $userEmail, $userLogin, $userPassword);

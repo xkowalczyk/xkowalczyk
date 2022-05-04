@@ -38,4 +38,13 @@ class ConfirmUserModel extends Model
 
         $this->builder->insert($data);
     }
+
+    public function updateConfirmStatus($userEmail, $status)
+    {
+        $this->getConnect();
+
+        $this->builder->where('confirmation_user_email', $userEmail)
+            ->update(array('confirmation_status' => $status));
+        $this->builder->get();
+    }
 }

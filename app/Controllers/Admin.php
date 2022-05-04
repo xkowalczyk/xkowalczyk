@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Libraries\Services\CategoryService;
+use App\Libraries\Services\ConfigService;
 use App\Libraries\Services\OrderService;
 use App\Libraries\Services\ProductService;
 use App\Libraries\Services\SuppliersService;
@@ -22,6 +23,7 @@ class Admin extends Controller
     private $userAddressService;
     private $tempAddressService;
     private $categoryService;
+    private $configService;
 
     public function __construct()
     {
@@ -33,6 +35,7 @@ class Admin extends Controller
         $this->userAddressService = new UserAddressService();
         $this->tempAddressService = new TempAddressService();
         $this->categoryService = new CategoryService();
+        $this->configService = new ConfigService();
     }
 
     public function index()
@@ -48,6 +51,10 @@ class Admin extends Controller
 
     public function orders()
     {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
         $SystemLang['usersOrders'] = $this->orderService->getAllOrders();
         echo view('Admin/header.php');
         echo view('Admin/modules/adminOrdersModule.php', $SystemLang);
@@ -55,6 +62,10 @@ class Admin extends Controller
 
     public function ordermanager($orderId = null)
     {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
         if ($orderId == null)
         {
             return redirect()->to(base_url('admin'));
@@ -111,6 +122,10 @@ class Admin extends Controller
 
     public function users()
     {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
         $users = $this->userService->getAllUsers();
 
         $SystemLang['users'] = $users;
@@ -121,6 +136,10 @@ class Admin extends Controller
 
     public function usermanager()
     {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
         $userId = $this->request->getPost('user-id');
         if ($userId == null)
         {
@@ -142,6 +161,10 @@ class Admin extends Controller
 
     public function products()
     {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
         $productsList = $this->productService->getAllProducts();
 
         $SystemLang['productsList'] = $productsList;
@@ -151,6 +174,10 @@ class Admin extends Controller
 
     public function productmanager()
     {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
         $productId = $this->request->getPost('product-id');
         if ($productId == null){
             return redirect()->to(base_url('admin/products'));
@@ -169,5 +196,32 @@ class Admin extends Controller
         $SystemLang['product'] = $product[0];
         echo view('Admin/header.php');
         echo view('Admin/modules/adminProductManagerModule.php', $SystemLang);
+    }
+
+    public function addproduct()
+    {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
+        $SystemLang['categoryList'] = $this->categoryService->getCategory();
+        $SystemLang['subcategoryList'] = $this->categoryService->getAllSubCategory();
+        echo view('Admin/header.php');
+        echo view('Admin/modules/adminAddProductModule.php', $SystemLang);
+    }
+
+    public function config()
+    {
+        if(!$this->sessionService->checkIssetSession('adminLogged')){
+            $this->sessionService->setFlashData('errorData', ['errorName' => 'Admin', 'errorDetails' => 'Brak autoryzacjii', 'errorToPage' => 'home']);
+            return redirect()->to(base_url('error'));
+        }
+
+        $SystemLang['subcategory'] = $this->categoryService->getAllSubCategory();
+        $SystemLang['statute'] = $this->configService->getStatute();
+        $SystemLang['category'] = $this->categoryService->getCategory();
+
+        echo view('Admin/header.php');
+        echo view('Admin/modules/adminConfigModule.php', $SystemLang);
     }
 }

@@ -21,4 +21,16 @@ class FeaturedProductModel extends Model
         $this->builder->select('featured_products_product_id');
         return $this->builder->get();
     }
+    public function addFeaturedProduct($productId)
+    {
+        $this->getConnect();
+        $this->builder->insert(array('featured_products_product_id' => $productId));
+    }
+
+    public function removeFeaturedProduct($productId)
+    {
+        $this->getConnect();
+        $this->builder->where('featured_products_product_id', $productId)->delete();
+        $this->get();
+    }
 }

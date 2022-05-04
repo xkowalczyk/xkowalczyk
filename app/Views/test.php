@@ -1,32 +1,36 @@
-<?php
-$FORMULARZ = [
-"SEKRET" => "NEl6Z1A1VHJmRjBSZ2xraU04ajd2V2Y4TElZSDlwSHJQd3Z5NkxVekk4Yz0,",
-"KWOTA" => "100",
-"NAZWA_USLUGI" => "TEST",
-"ADRES_WWW" => "http://xkowalczyk.pl/api/payment",
-"ID_ZAMOWIENIA" => "1",
-"EMAIL" => "",
-"DANE_OSOBOWE" => "",
-"TYP" => "INIT",
-];
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+    function save()
+    {
+        var formData = new FormData();
+        var files = $('#product_photo')[0].files;
 
-$FORMULARZ["HASH"]=hash("sha256", "TKfqVda3" . ";" . $FORMULARZ["KWOTA"] . ";" . $FORMULARZ["NAZWA_USLUGI"] . ";" . $FORMULARZ["ADRES_WWW"] . ";" . $FORMULARZ["ID_ZAMOWIENIA"] . ";" . $FORMULARZ["SEKRET"]);
-$ch = curl_init();
+        if(files.length < 1 ) {
+            alert("Zły plik");
+            return;
+        }
+        formData.append('action', 'editProductPhoto')
+        formData.append('value', 'testowy')
+        formData.append('file', files[0]);
 
-curl_setopt($ch, CURLOPT_URL,"https://platnosc.hotpay.pl/");
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS,$FORMULARZ);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$server_output = curl_exec($ch);
-curl_close ($ch);
-if(!empty($server_output)){
-$JSON=json_decode($server_output,true);
-if(!empty($JSON["STATUS"])){
-if($JSON["STATUS"] == true){
-echo '<a href="'.$JSON["URL"].'">Zapłać</a>';
-}else{
-// BŁĄD
-echo $JSON["WIADOMOSC"];
-}
-}
-}
+        $.ajax({
+            url: 'http://xkowalczyk.pl/api/admin',
+            data: formData,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            success:function(result){
+                console.log(result);
+            },
+            error:function (result) {
+                console.log(result, "b");
+            }
+        })
+    }
+</script>
+
+
+    <input type="file" id="product_photo">
+    <button class="submit" onclick="save()">z</button>
+
+

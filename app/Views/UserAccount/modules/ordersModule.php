@@ -1,5 +1,3 @@
-<?php print_r($orders) ?>
-
 <link href="<?= esc(base_url()) ?>/css/account/modules/style-account-ordersmodule.css" rel="stylesheet" type="text/css">
 
 <div class="orderslist">

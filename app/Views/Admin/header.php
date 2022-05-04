@@ -9,4 +9,6 @@
     <button onclick="location.href = '<?= esc(base_url()) ?>/admin/orders'">Zarządzaj zamówieniami</button>
     <button onclick="location.href = '<?= esc(base_url()) ?>/admin/products'">Zarządzaj produktami</button>
     <button onclick="location.href = '<?= esc(base_url()) ?>/admin/users'">Zarządzaj użytkownikami</button>
+    <button onclick="location.href = '<?= esc(base_url()) ?>/admin/config'">Zarządzaj sklepem</button>
+    <button onclick="location.href = '<?= esc(base_url()) ?>/adminlogout'">Wyloguj</button>
 </div>

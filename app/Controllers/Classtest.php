@@ -29,20 +29,22 @@ class Classtest extends Controller
         $this->sup = new SuppliersService();
         $this->order = new OrderService();
         $this->tmp = new TempAddressService();
+        $this->s = new Libraries\Services\ConfigService();
     }
     public function index()
     {
-        echo "s";
 
+
+        //echo "sss";
         //print_r($this->sup->getSuppliers());
-        $_SESSION['adminLogged'] = "ytmrhc@gmail.com";
+        //$_SESSION['adminLogged'] = "ytmrhc@gmail.com";
         //echo $this->testSystem->getSingleAddress(11);
         //if ($this->testSystemss->checkIssetSession('adminLogged') == true) {
           //  return redirect()->to(base_url('addmin'));
         //}
-        $SystemLang['totalPrice'] = '2137';
-        $SystemLang['userEmail'] = 'ytmrhc@gmail.com';
-        echo view('test.php', $SystemLang);
+        //$SystemLang['totalPrice'] = '2137';
+        //$SystemLang['userEmail'] = 'ytmrhc@gmail.com';
+        echo view('test.php');
 
     }
 
@@ -57,7 +59,9 @@ class Classtest extends Controller
           'user_address_homenumber' => 'numer domu',
           'user_address_postcode' => 'kod pocztowy',
         );
+
+        print_r($this->s->getStatute());
         //echo $this->tmp->getNewAddressId(2);
-        echo $this->order->getNewOrderId();
+        //echo $this->order->getNewOrderId();
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Libraries\Services\AuthService;
+use App\Libraries\Services\EmailService;
 use App\Libraries\Services\SessionService;
+use App\Libraries\Services\UserAddressService;
 use App\Libraries\Services\UserService;
 use CodeIgniter\Controller;
 
@@ -12,6 +14,8 @@ class Auth extends Controller
     private $authService;
     private $sessionService;
     private $userService;
+    private $emailService;
+    private $userAddressService;
     protected $request;
 
     public function __construct()
@@ -19,6 +23,8 @@ class Auth extends Controller
         $this->authService = new AuthService();
         $this->sessionService = new SessionService();
         $this->userService = new UserService();
+        $this->emailService = new EmailService();
+        $this->userAddressService = new UserAddressService();
     }
 
     public function index()
@@ -52,8 +58,13 @@ class Auth extends Controller
             $this->sessionService->setFlashData('errorData', ['errorName' => 'Logowanie', 'errorDetails' => 'Błędne hasło', 'errorToPage' => 'login']);
             return redirect()->to(base_url('error'));
         } else {
-            $this->authService->setLoginSession($data['userEmail']);
-            return redirect()->to(base_url('account'));
+            if ($this->userService->getAccountType($data['userEmail']) == 0) {
+                $this->authService->setLoginSession($data['userEmail']);
+                return redirect()->to(base_url('account'));
+            } else if ($this->userService->getAccountType($data['userEmail']) == 1) {
+                $this->sessionService->setSession('adminLogged', $data['userEmail']);
+                return redirect()->to(base_url('admin'));
+            }
         }
     }
 
@@ -92,7 +103,19 @@ class Auth extends Controller
             $data['userPostcode'],
         );
 
-        
+        $addressParameters = array(
+            'user_address_user' =>$data['userEmail'],
+            'user_address_user_id' => $this->userService->getSingleUser($data['userEmail'])[0]->user_id,
+            'user_address_street' =>$data['userStreet'],
+            'user_address_city' =>$data['userCity'],
+            'user_address_homenumber' =>$data['userHomenumber'],
+            'user_address_postcode' =>$data['userPostcode']
+        );
+
+        $this->emailService->sendActiveAccountEmail($data['userEmail'], $data['userName']);
+        $this->userAddressService->putAddress($addressParameters);
+        $this->sessionService->setFlashData('successData', ['successName' => 'Rejestracja', 'successDetails' => 'Konto założone, potwierdź rejstracje na poczcie', 'successToPage' => 'login']);
+        return redirect()->to(base_url('success'));
     }
 
     private function getLoginFormPool()

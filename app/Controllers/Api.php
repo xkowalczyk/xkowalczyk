@@ -3,6 +3,9 @@
 namespace App\Controllers;
 
 use App\Libraries\Services\BinService;
+use App\Libraries\Services\CategoryService;
+use App\Libraries\Services\ConfigService;
+use App\Libraries\Services\EmailService;
 use App\Libraries\Services\ProductService;
 use CodeIgniter\Controller;
 use App\Libraries\Services\SessionService;
@@ -18,6 +21,9 @@ class Api extends Controller
     private $userService;
     private $orderService;
     private $productService;
+    private $emailService;
+    private $configService;
+    private $categoryService;
     protected $helpers = ['form'];
 
     public function __construct()
@@ -28,6 +34,9 @@ class Api extends Controller
         $this->userService = new UserService();
         $this->orderService = new OrderService();
         $this->productService = new ProductService();
+        $this->emailService = new EmailService();
+        $this->configService = new ConfigService();
+        $this->categoryService = new CategoryService();
     }
 
     public function index()
@@ -161,11 +170,78 @@ class Api extends Controller
                 $this->productService->editProduct($value, $productParameters);
             } break;
             case "editProductPhoto" : {
-                $file = $this->request->getFile('image');
-                $file_name = $file->getRandomName();
-                $file->move('.public/graph/products/', $file_name);
 
+                print_r($this->request->getPost());
+                print_r($this->request->getFile('product_photo'));
+                print_r($_FILES);
+
+                if ($this->request->getFile('product_photo') != null) {
+                    $productParameters = array(
+                        'item_name' => $this->request->getPost('product_name'),
+                        'item_description' => $this->request->getPost('product_description'),
+                        'item_price' => $this->request->getPost('product_price'),
+                        'item_category' => $this->request->getPost('product_category'),
+                        'item_subcategory_id' => $this->request->getPost('product_subcategory'),
+                        'item_photo_id' => $action . ".jpg"
+                    );
+                    echo "cssa";
+                    $productPhoto = $this->request->getFile('product_photo');
+
+                    if(file_exists($path_to_file = "graph/products/{$value}.jpg")){
+                        unlink($path_to_file);
+                    }
+                    $productPhoto->move(ROOTPATH.'public/graph/products', $value.".jpg");
+
+                } else {
+                    $productParameters = array(
+                        'item_name' => $this->request->getPost('product_name'),
+                        'item_description' => $this->request->getPost('product_description'),
+                        'item_price' => $this->request->getPost('product_price'),
+                        'item_category_id' => $this->request->getPost('product_category'),
+                        'item_subcategory_id' => $this->request->getPost('product_subcategory')
+                    );
+                    echo "bezs";
+                    $this->productService->editProduct($value, $productParameters);
+                }
             } break;
+            case "removeCategory":{
+                $this->categoryService->removeCategory($value);
+            } break;
+            case "removeSubCategory":{
+                $this->categoryService->removeSubCategory($value);
+            } break;
+            case "editCategoryParameters":{
+                $this->categoryService->editCategory($value, $this->request->getPost('category_name'), $this->request->getPost('category_decription'));
+            } break;
+            case "addCategory":{
+                $this->categoryService->addCategory($this->request->getPost('category_name'), $this->request->getPost('category_description'), '1.jpg');
+            } break;
+            case "addSubCategory":{
+                $this->categoryService->addSubCategory($this->request->getPost('category_name'), $this->request->getPost('category_description'), $this->request->getPost('category_main'));
+            } break;
+            case "addProduct":{
+                $productParameters = array(
+                    'item_name' => $this->request->getPost('product_name'),
+                    'item_description' => $this->request->getPost('product_description'),
+                    'item_price' => $this->request->getPost('product_price'),
+                    'item_category_id' => $this->request->getPost('product_category'),
+                    'item_subcategory_id' => $this->request->getPost('product_subcategory')
+                );
+                $this->productService->addProduct($productParameters);
+                $productId = $this->productService->getLastAddItemId();
+                $productPhoto = $this->request->getFile('product_photo');
+                $productPhoto->move(ROOTPATH.'public/graph/products', $productId.".jpg");
+
+                $editParameters = array(
+                    'item_photo' => $productId.'.jpg'
+                );
+
+                $this->productService->editProduct($productId, $editParameters);
+                echo "chyva";
+            } break;
+            case "editStatute": {
+                $this->configService->editStatute($value);
+            }
             default: {
                 return "error_invalidaction";
             }
@@ -261,13 +337,33 @@ class Api extends Controller
 
     public function file()
     {
-        $img = $this->request->getFile('userfile');
+        print_r($this->request->getPost());
+        print_r($_FILES);
+        $file = $this->request->getPost('obrazek');
+        print_r($file);
+        /*
+        $file = $this->request->getFile('1');
+        print_r($file);
+        //$file->move(WRITEPATH.'upload', "chuj");
+        echo "sss";
+        return json_encode($file); */
+    }
 
-        if (! $img->hasMoved()) {
-            $filepath = WRITEPATH . 'uploads/' . $img->store();
-
-            $data = ['uploaded_flleinfo' => new File($filepath)];
-
+    public function activate($userEmail = null)
+    {
+        if ($userEmail == null){
+            return redirect()->to(base_url('home'));
         }
+
+        $this->userService->updateConfirmStatus($userEmail, 1);
+        $this->emailService->sendConfirmAccountEmail($userEmail);
+        return redirect()->to(base_url('login'));
+
+    }
+
+    public function adminLogout()
+    {
+        $this->sessionService->removeSession('adminLogged');
+        return redirect()->to(base_url('login'));
     }
 }

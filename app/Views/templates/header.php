@@ -8,6 +8,7 @@ $sessionService = new SessionService();
 
 $category = $categoryService->getCategory();
 $isLogged = $sessionService->checkIssetSession('userLogged');
+$admIsLogged = $sessionService->checkIssetSession('adminLogged');
 
 helper('html');
 
@@ -43,13 +44,17 @@ helper('html');
             </div>
 
             <div class="header_top_menu">
-                <?php if ($isLogged == false) { ?>
+                <?php if ($isLogged == true) { ?>
+                    <div class="header_top_menu_accountbutton">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAZRJREFUWEftl/ExBTEQh79XASqgE1RACVTAqwAVoAM6oAJ0QAd08FTA/EzOZDKX3OaymTkz9q8393LZ73Z/m92sWJitFsbDnwXaBq6BY0C/vewOWAObYUNrhB6AIy+KZJ974KQW6KsTjLZVdHZ6Ar0FJ/sVH/GbKWvKLBG6Am5iPQCXwIUBzB3oMQh+zLdFf+5Ap4AqZszOQ4WWAuUOdAg8ZzweAE8TaXMH6hahWLyx4KdEregoSu4amgskEFXUbVRlOtHPwvOpQsumrAVocPoaoKQdq3UFskLE67oAfYRKew+e9gBFaddA6Ar0EnRSKnvpq9RK3IA0OqhdWKx0QLoAqXfpy2ss19uagaQXaWSOSWOprpqBdN4oBXNMKdb55FplEnBOxFOQqrz0jGqO0JTT2v8XBfQZXxzSiTHXOixDVm1UhvXFIT8HpEapAUy535rreeQ9wag4stegHJAjQ3kra8r+gYYIKJeeGtG+1qvWD0O62HqPqklhE5AcCUp3bcscYwFrBrI46bamir4bRbTx4oC+AQPmWSWQyMshAAAAAElFTkSuQmCC" onclick="location.href='<?= esc(base_url()) ?>/account'" />
+                    </div>
+                <?php } else if ($admIsLogged == true){ ?>
+                    <div class="header_top_menu_accountbutton">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEfVl9FVwkAQRd/LYfMrViCdCBVoCVoBUIFQAdABdqAViB1oB9gB/hJPnmcFYpCEbMhG434mk9mbN7MzO0TDFhvGg/8JJKAdBcGE0jWAti9VRc5NHA8JrHY+nRSKyAcAV75A0n5E3odxfFMWSHXAbH2ujHReJ9ArNiG4dP0JIyWRcg1ZsULSuAVM0/kQASOQd0VgdQA9mk3CHyyX/PMOJOk2BOZZQGtgQHJyTCXvQJB6BlhkKgR0QT79KlBtCkVkkrxpGdPPc/50YaSe9xyqAARIoxYw250yW90/gD7I0cmnrBLQ964v2zrULQLZvc9Nak9ArhyJXS1AAt5ALhjHS7uTgqADqUvgoojQN9CzzZ+CY2/zKLeVeAOSNAyBaZEC9v2xAukHSBob26tKrLzeVhnI5ksodUqwJKZrcvkzryoDgZyZOB6cAhQFwRRSP/1tdSDbt6TM3lUISdr6tFejfAAV7lvGoGlA70ZKBoe9G+ORSv03l/w8oK9GSdoLmI39WZlwHLO1E4c9HLljUB6QLwAXP04hc3Hky6bxQHae8pYjVrX0kXZRcV8hxznKxXHW5cvlu4NB0TZAkTcu9xiXDSop5LJB3TZOo3TdEGn/jQP6BF8PHDSPkS2HAAAAAElFTkSuQmCC" onclick="location.href='<?= esc(base_url()) ?>/admin'" />
+                    </div>
+                    <?php } else {?>
                     <div class="header_top_menu_accountbutton">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAZRJREFUWEftl/ExBTEQh79XASqgE1RACVTAqwAVoAM6oAJ0QAd08FTA/EzOZDKX3OaymTkz9q8393LZ73Z/m92sWJitFsbDnwXaBq6BY0C/vewOWAObYUNrhB6AIy+KZJ974KQW6KsTjLZVdHZ6Ar0FJ/sVH/GbKWvKLBG6Am5iPQCXwIUBzB3oMQh+zLdFf+5Ap4AqZszOQ4WWAuUOdAg8ZzweAE8TaXMH6hahWLyx4KdEregoSu4amgskEFXUbVRlOtHPwvOpQsumrAVocPoaoKQdq3UFskLE67oAfYRKew+e9gBFaddA6Ar0EnRSKnvpq9RK3IA0OqhdWKx0QLoAqXfpy2ss19uagaQXaWSOSWOprpqBdN4oBXNMKdb55FplEnBOxFOQqrz0jGqO0JTT2v8XBfQZXxzSiTHXOixDVm1UhvXFIT8HpEapAUy535rreeQ9wag4stegHJAjQ3kra8r+gYYIKJeeGtG+1qvWD0O62HqPqklhE5AcCUp3bcscYwFrBrI46bamir4bRbTx4oC+AQPmWSWQyMshAAAAAElFTkSuQmCC" onclick="location.href='<?= esc(base_url()) ?>/login'" />
-                    </div>
-                <?php } else { ?>
-                    <div class="header_top_menu_accountbutton">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAdZJREFUWEfVl9FVwkAQRd/LYfMrViCdCBVoCVoBUIFQAdABdqAViB1oB9gB/hJPnmcFYpCEbMhG434mk9mbN7MzO0TDFhvGg/8JJKAdBcGE0jWAti9VRc5NHA8JrHY+nRSKyAcAV75A0n5E3odxfFMWSHXAbH2ujHReJ9ArNiG4dP0JIyWRcg1ZsULSuAVM0/kQASOQd0VgdQA9mk3CHyyX/PMOJOk2BOZZQGtgQHJyTCXvQJB6BlhkKgR0QT79KlBtCkVkkrxpGdPPc/50YaSe9xyqAARIoxYw250yW90/gD7I0cmnrBLQ964v2zrULQLZvc9Nak9ArhyJXS1AAt5ALhjHS7uTgqADqUvgoojQN9CzzZ+CY2/zKLeVeAOSNAyBaZEC9v2xAukHSBob26tKrLzeVhnI5ksodUqwJKZrcvkzryoDgZyZOB6cAhQFwRRSP/1tdSDbt6TM3lUISdr6tFejfAAV7lvGoGlA70ZKBoe9G+ORSv03l/w8oK9GSdoLmI39WZlwHLO1E4c9HLljUB6QLwAXP04hc3Hky6bxQHae8pYjVrX0kXZRcV8hxznKxXHW5cvlu4NB0TZAkTcu9xiXDSop5LJB3TZOo3TdEGn/jQP6BF8PHDSPkS2HAAAAAElFTkSuQmCC" onclick="location.href='<?= esc(base_url()) ?>/account'" />
                     </div>
                 <?php } ?>
 

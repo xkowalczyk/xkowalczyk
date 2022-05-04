@@ -1,0 +1,17 @@
+-Xms128m
+-Xmx2048m
+-XX:ReservedCodeCacheSize=512m
+-XX:+IgnoreUnrecognizedVMOptions
+-XX:+UseG1GC
+-XX:SoftRefLRUPolicyMSPerMB=50
+-XX:CICompilerCount=2
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:-OmitStackTraceInFastThrow
+-ea
+-Dsun.io.useCanonCaches=false
+-Djdk.http.auth.tunneling.disabledSchemes=""
+-Djdk.attach.allowAttachSelf=true
+-Djdk.module.illegalAccess.silent=true
+-Dkotlinx.coroutines.debug=off
+-Dsun.tools.attach.tmp.only=true
+-Djava.home=/home/server382046/ftp/.cache/JetBrains/RemoteDev-IU/_/pid.108.temp.jbr

@@ -31,7 +31,7 @@ class PayForm
             $JSON = json_decode($server_output, true);
             if (!empty($JSON["STATUS"])) {
                 if ($JSON["STATUS"] == true) {
-                    echo '<a target="_blank" href="' . $JSON["URL"] . '">Zapłać</a>';
+                    echo '<a target="_blank" href="' . $JSON["URL"] . '">Przejdź do płatności</a>';
                 } else {
                     // BŁĄD
                     echo $JSON["WIADOMOSC"];

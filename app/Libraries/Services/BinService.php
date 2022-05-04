@@ -73,4 +73,9 @@ class BinService
         setcookie('bin', implode(',', $newValue));
         return "true";
     }
+
+    public function clearBin()
+    {
+        delete_cookie('bin');
+    }
 }

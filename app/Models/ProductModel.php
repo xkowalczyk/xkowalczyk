@@ -49,7 +49,7 @@ class ProductModel extends Model
         return $this->builder->get();
     }
 
-    public function putProduct($productParameters)
+    public function addProduct($productParameters)
     {
         $this->getConnect();
         $this->builder->insert($productParameters);

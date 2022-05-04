@@ -17,6 +17,11 @@ class Error extends Controller
     public function index()
     {
         $errorData = $this->sessionService->getSingleSession('errorData');
+
+        if ($errorData['errorName'] == null || $errorData['errorDetails'] == null || $errorData['errorToPage'] == null){
+            return redirect()->to(base_url('home'));
+        }
+
         $SystemLang['errorName'] = $errorData['errorName'];
         $SystemLang['errorDetails'] = $errorData['errorDetails'];
         $SystemLang['errorToPage'] = $errorData['errorToPage'];
